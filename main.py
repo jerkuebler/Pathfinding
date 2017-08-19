@@ -1,3 +1,5 @@
+# Meant to demonstrate a simple pathfinding algorithm with recursion
+
 import pygame
 
 import grid
