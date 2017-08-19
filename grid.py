@@ -49,7 +49,7 @@ class Path(pygame.sprite.Sprite):
 
         pygame.sprite.Sprite.__init__(self)
 
-        self.active = False
+        self.active = True
         self.screen = screen
         self.color = (100, 100, 100)
         self.width = 1
@@ -104,25 +104,27 @@ class Grid():
             for path in paths:
                 self.paths.append(path)
 
-    def traverse(self, start, visited_nodes, finish):
+    def traverse(self, start, visited_nodes):
 
         green = (0, 255, 0)
         path_distance = 1000
         next_start = None
         chosen_path = None
 
-        if len(visited_nodes) < len(self.nodes):
-            for path in start.adjacent_nodes:
-                if path.dist_tot < path_distance and path.finish_node not in visited_nodes:
-                    path_distance = path.dist_tot
-                    next_start = path.finish_node
-                    chosen_path = path
-            print(chosen_path)
-            self.traverse_distance += path_distance
-            visited_nodes.append(start)
-            chosen_path.active = True
-            chosen_path.color = green
-            chosen_path.width = 5
-            next_start.color = green
+        for path in start.adjacent_nodes:
+            if path.dist_tot < path_distance and path.finish_node not in visited_nodes:
+                path_distance = path.dist_tot
+                next_start = path.finish_node
+                chosen_path = path
 
-            self.traverse(next_start, visited_nodes, finish)
+        self.traverse_distance += path_distance
+        visited_nodes.append(start)
+        chosen_path.active = True
+        chosen_path.color = green
+        chosen_path.width = 5
+        print(chosen_path)
+        next_start.color = green
+        if len(visited_nodes) == len(self.nodes):
+            print(self.traverse_distance)
+
+        return next_start, visited_nodes

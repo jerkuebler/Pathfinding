@@ -15,21 +15,21 @@ RED = (255, 0, 0)
 grid.screen.fill(BLACK)
 clock = pygame.time.Clock()
 done = False
-
-grid.traverse(grid.nodes[0], [grid.nodes[0]], grid.nodes[9])
-print(grid.traverse_distance)
+start_node = grid.nodes[0]
+visited_nodes = [grid.nodes[0]]
 
 while not done:
     pygame.display.update()
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
-
     for node in grid.nodes:
         node.update()
 
     for path in grid.paths:
         path.update()
 
-    clock.tick(10000)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    if len(visited_nodes) < len(grid.nodes):
+        start_node, visited_nodes = grid.traverse(start_node, visited_nodes)
+
+    clock.tick(1)
