@@ -20,8 +20,10 @@ class Node:
         if type(other) is type(self):
             if other.x == self.x and other.y == self.y:
                 return True
-            else:
-                return False
+        return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
     def __repr__(self):
         return "(x:%d, y:%d, num:%d)" % (self.x, self.y, self.num)
@@ -82,8 +84,7 @@ class Path:
                 return True
             elif start_is_finish and finish_is_start:
                 return True
-            else:
-                return False
+        return False
 
 
 class Grid:
