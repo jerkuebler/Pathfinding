@@ -3,10 +3,9 @@ import pygame
 from math import sqrt
 
 
-class Node(pygame.sprite.Sprite):
+class Node:
     def __init__(self, parent, x, y, num):
 
-        pygame.sprite.Sprite.__init__(self)
         self.color = (0, 0, 255)
         self.x = x
         self.y = y
@@ -44,10 +43,8 @@ class Node(pygame.sprite.Sprite):
         return self.adjacent_nodes
 
 
-class Path(pygame.sprite.Sprite):
+class Path:
     def __init__(self, screen, start, finish):
-
-        pygame.sprite.Sprite.__init__(self)
 
         self.active = True
         self.screen = screen
@@ -89,7 +86,7 @@ class Path(pygame.sprite.Sprite):
                 return False
 
 
-class Grid():
+class Grid:
     def __init__(self):
         self.nodes = []
         self.paths = []
